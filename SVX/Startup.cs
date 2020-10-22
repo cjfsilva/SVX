@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SVX.Data;
+using SVX.Models;
+using SVX.Services;
 
 namespace SVX {
     public class Startup {
@@ -29,6 +31,8 @@ namespace SVX {
             services.AddDbContext<SVXContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("SVXContext"), builder =>
                     builder.MigrationsAssembly("SVX")));
+
+            services.AddScoped<ClientService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

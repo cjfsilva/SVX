@@ -1,0 +1,78 @@
+﻿@model SVX.Models.ServerFormViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Server</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Server.Client" class="control-label"></label>
+                <select asp-for="Server.Client" asp-items="@(new SelectList(Model.Clients,"Id","Name"))" class="form-control"></select>
+                <span asp-validation-for="Server.Client" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.Type" class="control-label"></label>
+                <input asp-for="Server.Type" class="form-control" />
+                <span asp-validation-for="Server.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.Hardware" class="control-label"></label>
+                <input asp-for="Server.Hardware" class="form-control" />
+                <span asp-validation-for="Server.Hardware" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.Hostname" class="control-label"></label>
+                <input asp-for="Server.Hostname" class="form-control" />
+                <span asp-validation-for="Server.Hostname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.Ip" class="control-label"></label>
+                <input asp-for="Server.Ip" class="form-control" />
+                <span asp-validation-for="Server.Ip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.VersionSVX" class="control-label"></label>
+                <input asp-for="Server.VersionSVX" class="form-control" />
+                <span asp-validation-for="Server.VersionSVX" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.Os" class="control-label"></label>
+                <input asp-for="Server.Os" class="form-control" />
+                <span asp-validation-for="Server.Os" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.Database" class="control-label"></label>
+                <input asp-for="Server.Database" class="form-control" />
+                <span asp-validation-for="Server.Database" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.Perl" class="control-label"></label>
+                <input asp-for="Server.Perl" class="form-control" />
+                <span asp-validation-for="Server.Perl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Server.Application" class="control-label"></label>
+                <input asp-for="Server.Application" class="form-control" />
+                <span asp-validation-for="Server.Application" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

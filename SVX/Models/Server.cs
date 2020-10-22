@@ -2,6 +2,7 @@
     public class Server {
         public int Id { get; set; }
         public Client Client { get; set; }
+        public int ClientId { get; set; }
         public string Type { get; set; }
         public string Hardware { get; set; }
         public string Hostname { get; set; }

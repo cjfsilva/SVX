@@ -1,0 +1,78 @@
+﻿@model SVX.Models.Server
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Server</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClientId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hardware)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hardware)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hostname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hostname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ip)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ip)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VersionSVX)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VersionSVX)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Os)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Os)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Database)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Database)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Perl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Perl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Application)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Application)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

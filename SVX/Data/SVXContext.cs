@@ -17,5 +17,7 @@ namespace SVX.Data
         public DbSet<SVX.Models.Client> Client { get; set; }
 
         public DbSet<SVX.Models.Operator> Operator { get; set; }
+
+        public DbSet<SVX.Models.Server> Server { get; set; }
     }
 }
