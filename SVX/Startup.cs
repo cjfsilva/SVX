@@ -33,6 +33,7 @@ namespace SVX {
                     builder.MigrationsAssembly("SVX")));
 
             services.AddScoped<ClientService>();
+            services.AddScoped<ServerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

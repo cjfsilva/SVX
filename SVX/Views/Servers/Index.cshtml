@@ -1,17 +1,21 @@
-﻿@model IEnumerable<SVX.Models.Server>
+﻿@model IEnumerable<Server>
 
 @{
-    ViewData["Title"] = "Serves";
+    ViewData["Title"] = "Servers";
 }
 
-<h2>Servers</h2>
+<h2>@ViewData["Title"]</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-default">Create New</a>
 </p>
-<table class="table">
+
+<table class="table table-striped table-hover">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ClientId)
             </th>
@@ -42,48 +46,51 @@
             <th>
                 @Html.DisplayNameFor(model => model.Application)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClientId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hardware)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hostname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ip)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VersionSVX)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Os)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Database)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Perl)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Application)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hardware)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hostname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VersionSVX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Os)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Database)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Application)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
+

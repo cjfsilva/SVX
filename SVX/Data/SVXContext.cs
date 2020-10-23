@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SVX.Models;
 
-namespace SVX.Data
-{
+namespace SVX.Data {
     public class SVXContext : DbContext
     {
         public SVXContext (DbContextOptions<SVXContext> options)
@@ -14,10 +9,8 @@ namespace SVX.Data
         {
         }
 
-        public DbSet<SVX.Models.Client> Client { get; set; }
-
-        public DbSet<SVX.Models.Operator> Operator { get; set; }
-
-        public DbSet<SVX.Models.Server> Server { get; set; }
+        public DbSet<Client> Client { get; set; }
+        public DbSet<Operator> Operator { get; set; }
+        public DbSet<Server> Server { get; set; }
     }
 }
