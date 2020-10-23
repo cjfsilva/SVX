@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using SVX.Data;
 using SVX.Models;
 using SVX.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
 
 namespace SVX {
     public class Startup {
@@ -25,7 +28,6 @@ namespace SVX {
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<SVXContext>(options =>
@@ -38,6 +40,15 @@ namespace SVX {
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+
+            var enUS = new CultureInfo("en-US");
+            var localizationOptions = new RequestLocalizationOptions {
+                DefaultRequestCulture = new RequestCulture(enUS),
+                SupportedCultures = new List<CultureInfo> { enUS },
+                SupportedUICultures = new List<CultureInfo> { enUS }
+            };
+            app.UseRequestLocalization(localizationOptions);
+
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             } else {
