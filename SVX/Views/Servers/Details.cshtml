@@ -10,7 +10,13 @@
     <h4>Seller</h4>
     <hr />
     <dl class="dl-horizontal">
-        <!--Aplicando Inner Join Client--> 
+        <!--Aplicando Inner Join Client-->
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Client.Id)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Client)
         </dt>

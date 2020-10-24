@@ -3,7 +3,6 @@ using SVX.Data;
 using SVX.Models;
 using SVX.Services.Exceptions;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SVX.Services {
@@ -15,7 +14,8 @@ namespace SVX.Services {
         }
 
         public async Task<List<Server>> FindAllAsync() {
-            return await _context.Server.ToListAsync();
+            return await _context.Server.Include(obj => obj.Client).ToListAsync();
+            //return await _context.Server.Include(obj => obj.Client).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
         public async Task InsertAsync(Server obj) {
