@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SVX.Models;
@@ -19,7 +20,7 @@ namespace SVX.Controllers {
         //IactionResult = Mesmo nome da classe View = Index/Create/Delete/Details
         public async Task<IActionResult> Index() {
             var list = await _serverService.FindAllAsync();
-            return View(list);
+            return View(list.OrderBy(a => a.Client.Name));
         }
 
         //Rota para a View chamar via Asp.Net
