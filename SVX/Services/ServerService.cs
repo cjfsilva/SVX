@@ -21,7 +21,7 @@ namespace SVX.Services {
         }
 
         public async Task<List<Server>> FindByNameAsync(string name) {
-            var result = from obj in _context.Server select obj;
+            var result = from obj in _context.Server.Include(obj => obj.Client) select obj;
             result = result.Where(a => Regex.IsMatch(a.Client.Name, name));
             return await result.ToListAsync();          
         }
