@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Operator>
+
+@{
+    ViewData["Title"] = "Operation Search";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr bgcolor="#3e7e2c">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+    
+</table>
+<a asp-action="Index">Back to List</a>
+

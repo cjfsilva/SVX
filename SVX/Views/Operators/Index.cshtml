@@ -1,17 +1,17 @@
-﻿@model IEnumerable<Client>
+﻿@model IEnumerable<Operator>
 
 @{
-    ViewData["Title"] = "Clients";
+    ViewData["Title"] = "Operators";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <div class="row">
     <div class="col-md-6">
-        <form class="form-horizontal" asp-action="ClientSearch">
+        <form class="form-horizontal" asp-action="OperationSearch">
             <fieldset>
                 <div class="form-group">
-                    <label for="name" class="col-lg-2 control-label">Search</label>
+                    <label for="name" class="col-lg-2 control-label">Search</label> 
                     <div class="col-lg-10">
                         <input type="text" name="name" class="form-control" />
                     </div>

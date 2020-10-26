@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SVX.Models;
@@ -21,9 +22,7 @@ namespace SVX.Controllers {
         }
 
         //Rota para a View chamar via Asp.Net
-        public async Task<IActionResult> Create() {
-            //var list = await _clientService.FindAllAsync();
-            //var viewModel = new Client { Clients = clients };
+        public IActionResult Create() {         
             return View();
         }
 
@@ -65,6 +64,17 @@ namespace SVX.Controllers {
             var obj = await _clientService.FindByIdAsync(id.Value);
             if (obj == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
+            }
+            return View(obj);
+        }
+
+        public async Task<IActionResult> ClientSearch(string name) {
+            if (name == null) {
+                return RedirectToAction(nameof(Error), new { message = "Name is null" });
+            }
+            var obj = await _clientService.FindByNameAsync(name);
+            if (obj.Count() == 0) {
+                return RedirectToAction(nameof(Error), new { message = "Name not found" });
             }
             return View(obj);
         }

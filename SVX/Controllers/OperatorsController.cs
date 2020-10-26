@@ -1,40 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SVX.Models;
 using SVX.Services;
+using SVX.Services.Exceptions;
 
 namespace SVX.Controllers {
-    public class ServersController : Controller {
-        private readonly ServerService _serverService;
-        private readonly ClientService _clientService;
+    public class OperatorsController : Controller {
+        private readonly OperatorService _operatorService;
 
-        public ServersController(ServerService serverService, ClientService clientService) {
-            _serverService = serverService;
-            _clientService = clientService;
+        public OperatorsController(OperatorService operatorService) {
+            _operatorService = operatorService;
         }
 
         //IactionResult = Mesmo nome da classe View = Index/Create/Delete/Details
         public async Task<IActionResult> Index() {
-            var list = await _serverService.FindAllAsync();
-            return View(list.OrderBy(a => a.Client.Name));
+            var list = await _operatorService.FindAllAsync();
+            return View(list);
         }
 
         //Rota para a View chamar via Asp.Net
-        public async Task<IActionResult> Create() {
-            var clients = await _clientService.FindAllAsync();
-            var viewModel = new ServerFormViewModel { Clients = clients };
-            return View(viewModel);
+        public IActionResult Create() {                  
+            return View();
         }
 
         //Http = Rota para o Controlador chamar via Browser
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Server server) {
-            await _serverService.InsertAsync(server);
+        public async Task<IActionResult> Create(Operator Operator) {
+            await _operatorService.InsertAsync(Operator);
             return RedirectToAction(nameof(Index));
         }
 
@@ -42,7 +38,7 @@ namespace SVX.Controllers {
             if (id == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id is null" });
             }
-            var obj = await _serverService.FindByIdAsync(id.Value);
+            var obj = await _operatorService.FindByIdAsync(id.Value);
             if (obj == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
@@ -52,26 +48,31 @@ namespace SVX.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id) {
-            await _serverService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            //try = chave estrangeira não pode ser deletada
+            try {
+                await _operatorService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            } catch (IntegrityExceptions e) {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public async Task<IActionResult> Details(int? id) {
             if (id == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id is null" });
             }
-            var obj = await _serverService.FindByIdAsync(id.Value);
+            var obj = await _operatorService.FindByIdAsync(id.Value);
             if (obj == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
             return View(obj);
         }
 
-        public async Task<IActionResult> ServerSearch(string name) {
+        public async Task<IActionResult> OperationSearch(string name) {
             if (name == null) {
                 return RedirectToAction(nameof(Error), new { message = "Name is null" });
             }
-            var obj = await _serverService.FindByNameAsync(name);
+            var obj = await _operatorService.FindByNameAsync(name);
             if (obj.Count() == 0) {
                 return RedirectToAction(nameof(Error), new { message = "Name not found" });
             }
@@ -82,23 +83,22 @@ namespace SVX.Controllers {
             if (id == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id is null" });
             }
-            var obj = await _serverService.FindByIdAsync(id.Value);
+            var obj = await _operatorService.FindByIdAsync(id.Value);
             if (obj == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
-            List<Client> clients = await _clientService.FindAllAsync();
-            ServerFormViewModel viewModel = new ServerFormViewModel { Server = obj, Clients = clients };
-            return View(viewModel);
+            //var list = await _Operatorservice.FindByIdAsync(id.Value);
+            return View(obj);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Server server) {
-            if (id != server.Id) {
+        public async Task<IActionResult> Edit(int id, Operator Operator) {
+            if (id != Operator.Id) {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }
             try {
-                await _serverService.UpdateAsync(server);
+                await _operatorService.UpdateAsync(Operator);
                 return RedirectToAction(nameof(Index));
             } catch (ApplicationException e) {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
